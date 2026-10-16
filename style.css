@@ -1,0 +1,210 @@
+/* A simple style sheet for the DecorDreams website */
+body {
+    margin: 0;
+    background-color: #f6f0e8;
+    color: #292722;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    padding: 18px;
+    background-color: #3d4938;
+    color: white;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav {
+    margin-top: 15px;
+}
+
+nav a {
+    margin: 0 10px;
+    color: white;
+    text-decoration: none;
+}
+
+nav a:hover,
+footer a:hover {
+    text-decoration: underline;
+}
+
+.hero {
+    padding: 80px 20px;
+    color: white;
+    text-align: center;
+    background-image: linear-gradient(rgba(0, 0, 0, .45), rgba(0, 0, 0, .45)), url("images/hero-living-room.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.hero h2 {
+    font-size: 36px;
+}
+
+.button,
+button {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px 15px;
+    border: 1px solid #3d4938;
+    border-radius: 4px;
+    color: white;
+    background-color: #3d4938;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.button-light {
+    color: #292722;
+    background-color: #f6f0e8;
+}
+
+button:hover,
+.button:hover {
+    background-color: #75563f;
+    color: white;
+}
+
+.section {
+    max-width: 1100px;
+    margin: auto;
+    padding: 35px 20px;
+}
+
+.section h2 {
+    color: #75563f;
+}
+
+.category-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.product-card {
+    padding: 12px;
+    background-color: white;
+    border: 1px solid #d8c3aa;
+    border-radius: 5px;
+}
+
+.product-card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+}
+
+.product-card h3 {
+    margin-bottom: 5px;
+}
+
+.product-card p {
+    line-height: 1.5;
+}
+
+.price {
+    color: #75563f;
+    font-weight: bold;
+}
+
+.details-box {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: white;
+    border: 1px solid #d8c3aa;
+}
+
+.roomfit {
+    background-color: #e9e1d7;
+}
+
+.roomfit form {
+    max-width: 450px;
+}
+
+.roomfit label,
+.roomfit select {
+    display: block;
+    width: 100%;
+}
+
+.roomfit label {
+    margin-top: 12px;
+}
+
+.roomfit select {
+    box-sizing: border-box;
+    margin-top: 5px;
+    padding: 9px;
+}
+
+.recommendation {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: white;
+}
+
+.cart-row {
+    margin: 10px 0;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: white;
+}
+
+.cart-row img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+
+.cart-row span {
+    margin-right: auto;
+}
+
+footer {
+    padding: 20px;
+    color: white;
+    background-color: #3d4938;
+    text-align: center;
+}
+
+footer a {
+    color: white;
+}
+
+@media (max-width: 800px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    nav a {
+        display: inline-block;
+        margin: 5px;
+    }
+
+    .hero {
+        padding: 55px 15px;
+    }
+
+    .hero h2 {
+        font-size: 28px;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+}
