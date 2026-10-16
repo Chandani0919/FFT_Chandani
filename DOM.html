@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>DOM Example</title>
+        <style>
+            
+        </style>
+    </head>
+    <body>
+        <form>
+             <h1>Login Form </h1>
+             <label>Username</label>
+             <input type="text" name="uname" id="u1"><br><br>
+             <label>Password</label>
+             <input type= "password" name="pwd" id="p1" ><br><br>
+             <button type="button" onclick="Login()">Login</button>
+             <button>Reset</button>
+             <p id="result">Result:</p>
+        </form>
+        <p id="p1">Hello Impana</p>
+        <button onclick="Btn()">Change</button>
+        <script>
+            function Btn(){
+                    // alert("Welcome Impana to this page");
+                    document.getElementById('p1').innerHTML ="HOW ARE YOU!<3"
+            };
+            function Login(){
+                let uname = document.getElementById('u1').value;
+                let pwd = document.getElementById('p1').value;
+                if(uname == "Impana" && pwd == "12345"){
+                document.getElementById('result').innerHTML = "Login Successfull !!!"
+                result.style.color= "Green";
+                }else {
+                    document.getElementById('result').innerHTML = "Login Unsuccessfull !!!"
+                result.style.color= "red"
+                }
+
+            };
+        </script>
+    </body>
+</html>
