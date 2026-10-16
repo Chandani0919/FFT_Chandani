@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+      section {
+            animation: fadeIn 2s;
+            margin-bottom: 30px;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            
+            to {
+                opacity: 1;
+            }
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+        }
+        .skill-box {
+            border: 1px solid black;
+            padding: 15px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .skill-box:hover {
+            background-color: lightgray;
+            transform: scale(1.05);
+        }
+        .card {
+            border: 1px solid black;
+            padding: 15px;
+            transition: 0.3s;
+        }
+        .card:hover {
+            background-color: lightgray;
+            transform: translateY(-5px);
+        }
+        form {
+            width: 300px;
+            margin: 0 auto;
+        }
+        input, textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+        }
+        button {
+            padding: 8px 15px;
+            background-color: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        @media (max-width: 600px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Portfolio</h1>
+        <p style="text-align: center;">Web Developer</p>
+    </header>
+    <section>
+        <h2>Skills</h2>
+        <div class="grid-container">
+            <div class="skill-box">HTML</div>
+            <div class="skill-box">CSS</div>
+            <div class="skill-box">JavaScript</div>
+        </div>
+    </section>
+    <section>
+        <h2>Projects</h2>
+        <div class="grid-container">
+            <div class="card">
+                <h3>Project 1</h3>
+                <p>Simple HTML CSS website.</p>
+            </div>
+            <div class="card">
+                <h3>Project 2</h3>
+                <p>Responsive portfolio layout.</p>
+            </div>
+            <div class="card">
+                <h3>Project 3</h3>
+                <p>Grid and animation demo.</p>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h2>Contact Me</h2>
+        <form>
+            <label>Name:</label>
+            <input type="text" required>
+            <label>Email:</label>
+            <input type="email" required>
+            <label>Message:</label>
+            <textarea rows="4" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+</body>
+</html>

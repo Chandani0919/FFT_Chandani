@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive College Event Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background: #333;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .banner {
+            background: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        .container {
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+        .speaker-card {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        form div {
+            margin-bottom: 10px;
+        }
+        input, select {
+            padding: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .contact {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) {
+            nav a {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#details">Details</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#speakers">Speakers</a>
+        <a href="#register">Register</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <div class="banner">
+        <h1>Annual Tech Fest 2026</h1>
+        <p>Join us for the biggest event of the year!</p>
+    </div>
+    <div class="container">
+        <section id="details">
+            <h2>Event Details</h2>
+            <p>Welcome to our annual college tech fest featuring workshops, talks, and competitions across different screen sizes.</p>
+        </section>
+        <section id="schedule">
+            <h2>Schedule</h2>
+            <table>
+                <tr>
+                    <th>Time</th>
+                    <th>Event</th>
+                </tr>
+                <tr>
+                    <td>10:00 AM</td>
+                    <td>Keynote Speech</td>
+                </tr>
+                <tr>
+                    <td>02:00 PM</td>
+                    <td>Tech Workshop</td>
+                </tr>
+            </table>
+        </section>
+        <section id="speakers">
+            <h2>Speakers</h2>
+            <div class="speaker-card">
+                <h3>dhoni</h3>
+                <p>Web Developer</p>
+            </div>
+            <div class="speaker-card">
+                <h3>kholi</h3>
+                <p>AI Specialist</p>
+            </div>
+        </section>
+        <section id="register">
+            <h2>Registration</h2>
+            <form>
+                <div>
+                    <label>Name:</label>
+                    <input type="text" required>
+                </div>
+                <div>
+                    <label>Email:</label>0
+                    <input type="email" required>
+                </div>
+                <div>
+                    <label>Department:</label>
+                    <select required>
+                        <option value="">Select</option>
+                        <option value="cs">CS</option>
+                        <option value="it">IT</option>
+                    </select>
+                </div>
+                <input type="submit" value="Register">
+            </form>
+        </section>
+
+        <section id="contact" class="contact">
+            <h2>Contact Us</h2>
+            <p>Email: helloeveryone@college.edu</p>
+            <p>Phone: 1239472048</p>
+        </section>
+    </div>
+</body>
+</html>

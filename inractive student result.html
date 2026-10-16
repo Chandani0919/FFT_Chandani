@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Student Result Dashboard</title>
+    <style>
+        body {
+            background-color: #eef2f5;
+            margin: 0;
+            padding-top: 60px;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #0077cc;
+            padding: 12px 0;
+            text-align: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 15px;
+            padding: 6px 12px;
+            border-radius: 4px;
+        }
+
+        .navbar a:hover {
+            background-color: #005fa3;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            color: #0077cc;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        h2 {
+            color: #0077cc;
+            border-bottom: 2px solid #0077cc;
+            padding-bottom: 6px;
+            margin-top: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+            width: 55%;
+        }
+
+        input {
+            width: 40%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            border-color: #0077cc;
+            outline: none;
+        }
+
+        button {
+            background-color: #0077cc;
+            color: white;
+            padding: 12px 24px;
+           
+            font-size: 16px;
+            font-weight: bold;
+            
+            margin: 25px auto 15px auto;
+            width: 100%;
+        }
+
+
+        p {
+            font-size: 16px;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        span {
+            font-weight: bold;
+            color: #0077cc;
+        }
+
+        .pass {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        .fail {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="#details-section">Student Details</a>
+        <a href="#marks-section">Subject-Wise Marks</a>
+        <a href="#result-section">Result Summary</a>
+    </div>
+
+    <div class="container">
+        <h1>Student Result Dashboard</h1>
+
+        <div id="details-section">
+            <h2>Student Details</h2>
+            <div class="form-group">
+                <label for="studentName">Student Name:</label>
+                <input type="text" id="studentName" placeholder="Enter name">
+            </div>
+            <div class="form-group">
+                <label for="rollnumber">Roll Number:</label>
+                <input type="text" id="rollnumber" placeholder="Enter roll number">
+            </div>
+            <div class="form-group">
+                <label for="course">Course:</label>
+                <input type="text" id="course" placeholder="Enter course">
+            </div>
+        </div>
+
+        <div id="marks-section">
+            <h2>Subject-Wise Marks (Max: 100)</h2>
+            <div class="form-group">
+                <label for="python">Python:</label>
+                <input type="number" id="python" min="0" max="100">
+            </div>
+            <div class="form-group">
+                <label for="adst">Advanced Data Science:</label>
+                <input type="number" id="adst" min="0" max="100">
+            </div>
+            <div class="form-group">
+                <label for="eft">Front-End Framework & Technologies:</label>
+                <input type="number" id="eft" min="0" max="100">
+            </div>
+            <div class="form-group">
+                <label for="psta">Problem Solving through Aptitude:</label>
+                <input type="number" id="psta" min="0" max="100">
+            </div>
+            <div class="form-group">
+                <label for="ds">Discrete Structure:</label>
+                <input type="number" id="ds" min="0" max="100">
+            </div>
+            <div class="form-group">
+                <label for="ui">UI & UX Design:</label>
+                <input type="number" id="ui" min="0" max="100">
+            </div>
+            <div class="form-group">
+                <label for="communication">Communication and Life Skills:</label>
+                <input type="number" id="communication" min="0" max="100">
+            </div>
+        </div>
+
+        <button onclick="calculateResult()">Calculate Result</button>
+
+        <div id="result-section">
+            <h2>Result Summary</h2>
+            <p>Student Name: <span id="displayName">-</span></p>
+            <p>Roll Number: <span id="displayRoll">-</span></p>
+            <p>Course: <span id="displayCourse">-</span></p>
+            <p>Total Marks: <span id="total">0</span> / 700</p>
+            <p>Average: <span id="average">0</span></p>
+            <p>Percentage: <span id="percentage">0</span>%</p>
+            <p>Grade: <span id="grade">-</span></p>
+            <p>Result: <span id="status">-</span></p>
+        </div>
+    </div>
+
+    <script>
+        function calculateResult() {
+            let name = document.getElementById("studentName").value;
+            let roll = document.getElementById("rollnumber").value;
+            let course = document.getElementById("course").value;
+
+            let python = Number(document.getElementById("python").value);
+            let adst = Number(document.getElementById("adst").value);
+            let eft = Number(document.getElementById("eft").value);
+            let psta = Number(document.getElementById("psta").value);
+            let ds = Number(document.getElementById("ds").value);
+            let ui = Number(document.getElementById("ui").value);
+            let communication = Number(document.getElementById("communication").value);
+
+            let total = python + adst + eft + psta + ds + ui + communication;
+            let average = total / 7;
+            let percentage = (total / 700) * 100;
+
+            let grade;
+            if (percentage >= 90) {
+                grade = "A+";
+            } else if (percentage >= 80) {
+                grade = "A";
+            } else if (percentage >= 70) {
+                grade = "B";
+            } else if (percentage >= 60) {
+                grade = "C";
+            } else if (percentage >= 50) {
+                grade = "D";
+            } else {
+                grade = "F";
+            }
+
+            let status;
+            let statusElement = document.getElementById("status");
+
+            if (python >= 35 && adst >= 35 && eft >= 35 && psta >= 35 && ds >= 35 && ui >= 35 && communication >= 35) {
+                status = "PASS";
+                statusElement.className = "pass";
+            } else {
+                status = "FAIL";
+                statusElement.className = "fail";
+            }
+
+            document.getElementById("displayName").innerText = name !== "" ? name : "-";
+            document.getElementById("displayRoll").innerText = roll !== "" ? roll : "-";
+            document.getElementById("displayCourse").innerText = course !== "" ? course : "-";
+
+            document.getElementById("total").innerText = total;
+            document.getElementById("average").innerText = average.toFixed(2);
+            document.getElementById("percentage").innerText = percentage.toFixed(2);
+            document.getElementById("grade").innerText = grade;
+            statusElement.innerText = status;
+        }
+    </script>
+</body>
+</html>

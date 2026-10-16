@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do List</title>
+<style>
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f2f2f2 url('todo.jpg') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 30px;
+    margin: 0;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.75);
+    width: 90%;
+    max-width: 900px;
+    min-height: 80vh;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.25);
+    backdrop-filter: blur(5px);
+}
+
+h2 {
+    text-align: center;
+    margin-top: 0;
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+.input-box, .btn-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.btn-group {
+    gap: 10px;
+}
+
+input[type="text"], .btn-group button {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 14px;
+    font-size: 16px;
+}
+
+.btn-group button {
+    flex: 1;
+    padding: 12px;
+    background: rgba(248, 249, 250, 0.9);
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button {
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.add-btn {
+    background: #767976;
+    color: #fff;
+    padding: 12px 25px;
+    font-size: 16px;
+}
+
+.clear-btn, .del-btn {
+    background: #dc3545;
+    color: #fff;
+}
+
+.clear-btn {
+    padding: 10px 15px;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.task-count {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    background: rgba(249, 249, 249, 0.9);
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 17px;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.edit-btn, .del-btn {
+    padding: 8px 12px;
+}
+
+.edit-btn {
+    background: #ffc107;
+    margin-right: 5px;
+}
+</style>
+
+</head>
+<body>
+
+  <div class="container">
+    <h2>To-Do List</h2>
+    
+    <div class="input-box">
+      <input type="text" id="myInput" placeholder="Enter task...">
+      <button class="add-btn" onclick="addTask()">Add</button>
+    </div>
+
+    <div class="btn-group">
+      <button onclick="setFilter('all')">All</button>
+      <button onclick="setFilter('pending')">Pending</button>
+      <button onclick="setFilter('completed')">Completed</button>
+    </div>
+
+    <button class="clear-btn" onclick="clearDone()">Clear Completed</button>
+
+    <div class="task-count" id="countText">Pending: 0</div>
+
+    <ul id="myList"></ul>
+  </div>
+
+  <script>
+    var taskList = JSON.parse(localStorage.getItem("tasks")) || [];
+    var filter = "all";
+
+    function showList() {
+      var ul = document.getElementById("myList");
+      ul.innerHTML = "";
+
+      var pendingCount = 0;
+
+      for (var i = 0; i < taskList.length; i++) {
+        if (taskList[i].completed === false) {
+          pendingCount = pendingCount + 1;
+        }
+
+        if (filter === "pending" && taskList[i].completed === true) {
+          continue;
+        }
+        if (filter === "completed" && taskList[i].completed === false) {
+          continue;
+        }
+
+        var li = document.createElement("li");
+
+        var divLeft = document.createElement("div");
+
+        var checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = taskList[i].completed;
+        checkbox.setAttribute("onclick", "checkTask(" + i + ")");
+
+        var span = document.createElement("span");
+        span.textContent = " " + taskList[i].text;
+        if (taskList[i].completed === true) {
+          span.className = "completed";
+        }
+
+        divLeft.appendChild(checkbox);
+        divLeft.appendChild(span);
+
+        var divRight = document.createElement("div");
+
+        var editBtn = document.createElement("button");
+        editBtn.textContent = "Edit";
+        editBtn.className = "edit-btn";
+        editBtn.setAttribute("onclick", "editTask(" + i + ")");
+
+        var delBtn = document.createElement("button");
+        delBtn.textContent = "Delete";
+        delBtn.className = "del-btn";
+        delBtn.setAttribute("onclick", "deleteTask(" + i + ")");
+
+        divRight.appendChild(editBtn);
+        divRight.appendChild(delBtn);
+
+        li.appendChild(divLeft);
+        li.appendChild(divRight);
+
+        ul.appendChild(li);
+      }
+
+      document.getElementById("countText").textContent = "Pending: " + pendingCount;
+      localStorage.setItem("tasks", JSON.stringify(taskList));
+    }
+
+    function addTask() {
+      var input = document.getElementById("myInput");
+      var text = input.value;
+
+      if (text !== "") {
+        var item = { text: text, completed: false };
+        taskList.push(item);
+        input.value = "";
+        showList();
+      }
+    }
+
+    function checkTask(index) {
+      if (taskList[index].completed === true) {
+        taskList[index].completed = false;
+      } else {
+        taskList[index].completed = true;
+      }
+      showList();
+    }
+
+    function editTask(index) {
+      var newText = prompt("Edit task:", taskList[index].text);
+      if (newText !== null && newText !== "") {
+        taskList[index].text = newText;
+        showList();
+      }
+    }
+
+    function deleteTask(index) {
+      taskList.splice(index, 1);
+      showList();
+    }
+
+    function setFilter(type) {
+      filter = type;
+      showList();
+    }
+
+    function clearDone() {
+      var newArr = [];
+      for (var i = 0; i < taskList.length; i++) {
+        if (taskList[i].completed === false) {
+          newArr.push(taskList[i]);
+        }
+      }
+      taskList = newArr;
+      showList();
+    }
+
+    showList();
+  </script>
+
+</body>
+</html>
